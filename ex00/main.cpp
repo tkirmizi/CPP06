@@ -53,26 +53,90 @@ class ScalarConverter{
 		ScalarConverter &operator=(ScalarConverter const &other);
 		~ScalarConverter();
 
-		// bool functions
-		static bool isChar(std::string const &str);
-		static bool isInt(std::string const &str);
+		// all bool will be private !
 		static bool isFloat(std::string const &str);
 		static bool isDouble(std::string const &str);
 
 	public:
+		static bool isInt(std::string const &str);
+		static bool isChar(std::string const &str);
 		static void convert(std::string const &literal);
+
+		class NonDisplayableException : public std::exception{
+		public:
+			virtual const char* what() const throw(){ return "Non displayable character";}};
+
+		class ImpossibleException : public std::exception {
+		public:
+			virtual const char* what() const throw() {return "Impossible conversion";}};
+
+		class OverflowException : public std::exception{
+		public:
+			virtual const char* what() const throw() {return "Overflow";}};
 };
 
-bool ScalarConverter::isChar(std::string const &str){
-	int flag;
-	flag = 1;
-	if (str.length() != 3)
-		flag = 0;
-	else if (str[0] != '\'')
-		flag = 0;
-	else if (str[2] != '\'')
-		flag = 0;
-	else if (!std::isprint(str[1]))
-		flag = 0;
-	return flag;
+bool ScalarConverter::isChar(std::string const &str)
+{
+	try
+	{
+		if (str.length() != 3)
+			throw ImpossibleException("char: wrong length");
+	
+		if (str[0] != '\'')
+			throw ImpossibleException("char: missing opening quote");
+	
+		if (str[2] != '\'')
+			throw ImpossibleException("char: missing closing quote");
+	
+		if (!std::isprint(str[1]))
+			throw NonDisplayableException();
+	
+		return true;
+	}
+	catch(const NonDisplayableException& e)
+	{
+		throw;
+	}
+	catch(const ImpossibleException& e)
+	{
+		throw;
+	}
 }
+bool ScalarConverter::isInt(std::string const &str)
+{
+	if (str.empty())
+		throw ImpossibleException(std::string("char: wrong length"));
+	
+	size_t sign = 0;
+	if (str[0] == '-' || str[0] == '+')
+	{
+		sign = 1;
+		if (str.length() == 1)
+			throw ImpossibleException();
+	}
+
+	for (; sign < str.length(); sign++)
+	{
+		if (!std::isdigit(str[sign]))
+			throw ImpossibleException();
+	}
+
+	try
+	{
+		int value = std::stoi(str);
+		if (value > std::numeric_limits<int>::max())
+			throw OverflowException();
+	}
+	catch (const std::out_of_range&)
+	{
+		throw OverflowException();
+	}
+	catch (const std::invalid_argument&)
+	{
+		throw ImpossibleException();
+	}
+
+	return true;
+}
+
+
