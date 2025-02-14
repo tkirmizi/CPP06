@@ -17,6 +17,12 @@
 
 	std::precision -> kac basamak goruntuleceginni belirler. numberden once gelir
 	std::precison ile kullanildiginda precision noktadan sonra kac basamak gelcegini ayarlar
+
+	TODO FOR TOMORROW
+	do it without exception
+	then implement exceptions
+
+
 */
 
 
@@ -77,21 +83,23 @@ class ScalarConverter{
 
 bool ScalarConverter::isChar(std::string const &str)
 {
-	try
-	{
+	int flag = 1;
+
 		if (str.length() != 3)
-			throw ImpossibleException("char: wrong length");
+			flag = 0;
 	
 		if (str[0] != '\'')
-			throw ImpossibleException("char: missing opening quote");
+			flag = 0;
 	
 		if (str[2] != '\'')
-			throw ImpossibleException("char: missing closing quote");
+			flag = 0;
 	
 		if (!std::isprint(str[1]))
-			throw NonDisplayableException();
+			flag = 0;
 	
-		return true;
+		if (!flag)
+			return false
+		return ture;
 	}
 	catch(const NonDisplayableException& e)
 	{
