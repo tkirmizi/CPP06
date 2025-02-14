@@ -60,10 +60,10 @@ class ScalarConverter{
 		~ScalarConverter();
 
 		// all bool will be private !
-		static bool isFloat(std::string const &str);
-		static bool isDouble(std::string const &str);
 
 	public:
+		static bool isDouble(std::string const &str);
+		static bool isFloat(std::string const &str);
 		static bool isInt(std::string const &str);
 		static bool isChar(std::string const &str);
 		static void convert(std::string const &literal);
@@ -80,6 +80,8 @@ class ScalarConverter{
 		public:
 			virtual const char* what() const throw() {return "Overflow";}};
 };
+
+
 
 bool ScalarConverter::isChar(std::string const &str)
 {
@@ -98,53 +100,114 @@ bool ScalarConverter::isChar(std::string const &str)
 			flag = 0;
 	
 		if (!flag)
-			return false
-		return ture;
-	}
-	catch(const NonDisplayableException& e)
-	{
-		throw;
-	}
-	catch(const ImpossibleException& e)
-	{
-		throw;
-	}
+			return false;
+		return true;
 }
+
 bool ScalarConverter::isInt(std::string const &str)
 {
-	if (str.empty())
-		throw ImpossibleException(std::string("char: wrong length"));
-	
+	int flag = 1;
 	size_t sign = 0;
+
+	if (str.empty())
+		flag = 0;
 	if (str[0] == '-' || str[0] == '+')
 	{
 		sign = 1;
 		if (str.length() == 1)
-			throw ImpossibleException();
+			flag = 0;
 	}
 
 	for (; sign < str.length(); sign++)
 	{
 		if (!std::isdigit(str[sign]))
-			throw ImpossibleException();
+			return false;
+	}
+	if (!flag)
+		return false;
+	return true;
+}
+
+bool ScalarConverter::isFloat(std::string const &str)
+{
+	int flag = 1;
+	size_t sign = 0;
+	size_t dot = 0;
+
+	if (!str[0])
+		return false;
+
+	if (str == "nanf" || str == "+inff" || str == "-inff")
+		return true;
+
+	if (str.empty())
+		return false;
+		
+	if (str[str.length() - 1] != 'f')
+		flag = 0;
+
+	if (str[0] == '-' || str[0] == '+')
+	{
+		sign = 1;
+		if (str.length() == 1)
+			flag = 0;
 	}
 
-	try
+	for (; sign < str.length(); sign++)
 	{
-		int value = std::stoi(str);
-		if (value > std::numeric_limits<int>::max())
-			throw OverflowException();
+		if (!std::isdigit(str[sign]) && str[sign] != '.')
+			flag = 0;
+		if (str[sign] == '.')
+			dot++;
 	}
-	catch (const std::out_of_range&)
-	{
-		throw OverflowException();
-	}
-	catch (const std::invalid_argument&)
-	{
-		throw ImpossibleException();
-	}
-
+	if (dot > 1)
+		flag = 0;	
 	return true;
 }
 
 
+bool ScalarConverter::isDouble(std::string const &str)
+{
+	int flag = 1;
+	size_t sign = 0;
+	size_t dot = 0;
+
+	if (!str[0])
+		return false;
+	if (str == "nan" || str == "+inf" || str == "-inf")
+		return true;
+
+	if (str.empty())
+		return false;
+		
+	if (str[0] == '-' || str[0] == '+')
+	{
+		sign = 1;
+		if (str.length() == 1)
+			return false;
+	}
+
+	for (; sign < str.length(); sign++)
+	{
+		if (!std::isdigit(str[sign]) && str[sign] != '.')
+			return false;
+		if (str[sign] == '.')
+			dot++;
+	}
+	if (dot > 1)
+		return false;
+	return true;
+}
+
+
+int main(){
+std::cout << ScalarConverter::isDouble("abc") << std::endl;   // false
+std::cout << ScalarConverter::isDouble("") << std::endl; // false
+std::cout << ScalarConverter::isDouble("42.0f") << std::endl; // false 
+std::cout << ScalarConverter::isDouble("42.0") << std::endl;  // true
+std::cout << ScalarConverter::isDouble("-42.42") << std::endl;// true
+std::cout << ScalarConverter::isDouble("nan") << std::endl;   // true
+std::cout << ScalarConverter::isDouble("+inf") << std::endl;  // true
+std::cout << ScalarConverter::isDouble("-inf") << std::endl;  // true
+std::cout << ScalarConverter::isDouble("42.0.1") << std::endl;// false
+}
