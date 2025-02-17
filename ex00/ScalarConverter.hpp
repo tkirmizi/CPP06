@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taha <taha@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tkirmizi <tkirmizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 18:38:45 by taha              #+#    #+#             */
-/*   Updated: 2025/02/15 18:39:57 by taha             ###   ########.fr       */
+/*   Updated: 2025/02/17 12:36:53 by tkirmizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <limits>
 #include <iomanip>
 #include <cmath>
+#include "Convert.hpp"
 
 class ScalarConverter{
 private:

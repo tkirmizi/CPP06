@@ -6,7 +6,7 @@
 /*   By: tkirmizi <tkirmizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 18:44:56 by taha              #+#    #+#             */
-/*   Updated: 2025/02/17 11:06:55 by tkirmizi         ###   ########.fr       */
+/*   Updated: 2025/02/17 12:36:38 by tkirmizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ bool ScalarConverter::isFloat(std::string const &str)
 	return true;
 }
 
+
 bool ScalarConverter::isDouble(std::string const &str)
 {
 	size_t sign = 0;
@@ -145,118 +146,10 @@ void ScalarConverter::convert(std::string const &literal)
 	bool iff = isFloat(literal);
 	bool id = isDouble(literal);
 
-	//CHAR
-	std::cout << "char: ";
-	if (ic)
-		std::cout << "'" << literal[1] << "'" << std::endl;
-	else if (isSpecial)
-		std::cout << "impossible" << std::endl;
-	else if (id || iff || ii)
-	{
-		try
-		{
-			if (ii)
-				int value = static_cast<int>(literal[1]);
-			else if (iff)
-				int value = static_cast<int>(std::stof(literal));
-			else if (id)
-				int value = static_cast<int>(std::stod(literal));
-		}
-		catch(const std::exception& e)
-		{
-			std::cout << "impossible" << std::endl;
-		}
-	}
-	else 
-		std::cout << "impossible" << std::endl;
-
-	// INT
-	std::cout << "int: ";
-	if (isSpecial)
-		std::cout << "impossible" << std::endl;
-	else
-	{
-		try
-		{
-			int value = 0;
-			if (ic)
-				value = static_cast<int>(literal[1]);
-			else if (ii)
-				value = std::stoi(literal);
-			else if (iff)
-				value = static_cast<int>(std::stof(literal));
-			else if (id)
-				value = static_cast<int>(std::stod(literal));
-			std::cout << value << std::endl;
-		}
-		catch (const std::exception& e)
-		{
-			std::cout << "impossible" << std::endl;
-		}
-	}
-
-	// FLOAT
-	std::cout << "float: ";
-	if (isSpecial)
-	{
-		if (literal == "nan" || literal == "nanf")
-			std::cout << "nanf" << std::endl;
-		else if (literal == "+inf" || literal == "+inff")
-			std::cout << "+inff" << std::endl;
-		else
-			std::cout << "-inff" << std::endl;
-	}
-	else
-	{
-		try
-		{
-			float value = 0;
-			if (ic)
-				value = static_cast<float>(literal[1]);
-			else if (ii)
-				value = static_cast<float>(std::stoi(literal));
-			else if (iff)
-				value = std::stof(literal);
-			else if (id)
-				value = static_cast<float>(std::stod(literal));
-			std::cout << std::fixed << std::setprecision(1) << value << "f" << std::endl;
-		}
-		catch (const std::exception& e)
-		{
-			std::cout << "impossible" << std::endl;
-		}
-	}
-
-	//DOUBLE
-	std::cout << "double: ";
-	if (isSpecial)
-	{
-
-		if (literal == "nan" || literal == "nanf")
-			std::cout << "nan" << std::endl;
-		else if (literal == "+inf" || literal == "+inff")
-			std::cout << "+inf" << std::endl;
-		else
-			std::cout << "-inf" << std::endl;
-	}
-	else
-	{
-		try 
-		{
-			double value = 0;
-			if (ic)
-				value = static_cast<double>(literal[1]);
-			else if (ii)
-				value = static_cast<double>(std::stoi(literal));
-			else if (iff)
-				value = static_cast<double>(std::stof(literal));
-			else if (id)
-				value = std::stod(literal);
-			std::cout << std::fixed << std::setprecision(1) << value << std::endl;
-		}
-		catch (const std::exception& e) 
-		{
-			std::cout << "impossible" << std::endl;
-		}
-	}
+	charWritter(literal, ic, ii, iff, id, isSpecial);
+	intWritter(literal, ic, ii, iff, id, isSpecial);
+	floatWritter(literal, ic, ii, iff, id, isSpecial);
+	doubleWritter(literal, ic, ii, iff, id, isSpecial);
 }
+
+

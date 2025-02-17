@@ -1,5 +1,5 @@
 NAME = convert
-SRCS = main.cpp ScalarConverter.cpp
+SRCS = main.cpp ScalarConverter.cpp Convert.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 CXX = clang++
