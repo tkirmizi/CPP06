@@ -1,5 +1,5 @@
 NAME = identify
-SRCS = main.cpp ABase.cpp Identify.cpp
+SRCS = main.cpp Base.cpp Identify.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 CXX = clang++

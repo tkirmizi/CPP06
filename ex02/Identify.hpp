@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Identify.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taha <taha@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tkirmizi <tkirmizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 13:24:58 by taha              #+#    #+#             */
-/*   Updated: 2025/02/16 13:35:28 by taha             ###   ########.fr       */
+/*   Updated: 2025/02/17 11:24:46 by tkirmizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 #include <string>
 #include <cstdlib>
 #include <ctime>
-#include "ABase.hpp"
+#include "Base.hpp"
 #include "A.hpp"
 #include "B.hpp"
 #include "C.hpp"
 
-ABase*	generate(void);
-void	identify(ABase* p);
-void	identify(ABase& p);
+Base*	generate(void);
+void	identify(Base* p);
+void	identify(Base& p);

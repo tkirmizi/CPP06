@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   C.hpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taha <taha@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tkirmizi <tkirmizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 13:23:04 by taha              #+#    #+#             */
-/*   Updated: 2025/02/16 13:23:34 by taha             ###   ########.fr       */
+/*   Updated: 2025/02/17 11:23:36 by tkirmizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef C_HPP
 #define C_HPP
 
-#include "ABase.hpp"
+#include "Base.hpp"
 
-class C : public ABase {};
+class C : public Base {};
 
 #endif

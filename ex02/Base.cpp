@@ -1,25 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ABase.hpp                                          :+:      :+:    :+:   */
+/*   Base.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taha <taha@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tkirmizi <tkirmizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/16 13:21:49 by taha              #+#    #+#             */
-/*   Updated: 2025/02/16 13:30:23 by taha             ###   ########.fr       */
+/*   Created: 2025/02/16 13:30:04 by taha              #+#    #+#             */
+/*   Updated: 2025/02/17 11:24:58 by tkirmizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Base.hpp"
 
-#ifndef ABASE_HPP
-#define ABASE_HPP
-
-#include <iostream>
-
-class ABase
-{
-	public:
-		virtual ~ABase();
-};
-
-#endif
+Base::~Base(){};

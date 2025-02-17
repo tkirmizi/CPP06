@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   B.hpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taha <taha@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tkirmizi <tkirmizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 13:22:55 by taha              #+#    #+#             */
-/*   Updated: 2025/02/16 13:23:39 by taha             ###   ########.fr       */
+/*   Updated: 2025/02/17 11:23:31 by tkirmizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef B_HPP
 #define B_HPP
 
-#include "ABase.hpp"
+#include "Base.hpp"
 
-class B : public ABase {};
+class B : public Base {};
 
 #endif
