@@ -6,7 +6,7 @@
 /*   By: taha <taha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 18:44:56 by taha              #+#    #+#             */
-/*   Updated: 2025/02/15 18:59:39 by taha             ###   ########.fr       */
+/*   Updated: 2025/02/16 12:42:38 by taha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,10 @@ ScalarConverter &ScalarConverter::operator=(ScalarConverter const &other){(void)
 
 bool ScalarConverter::isChar(std::string const &str)
 {
-	if (str.length() != 3 || str.length() != 1)
+	if (str.length() != 3)
 		return false;
-	if (str.length() == 3)
-	{
-		if (str[0] != '\'' || str[2] != '\'')
-			return false;
-	}
+	if (str[0] != '\'' || str[2] != '\'')
+		return false;
 	return true;
 }
 
@@ -150,12 +147,7 @@ void ScalarConverter::convert(std::string const &literal)
 
 	std::cout << "char: ";
 	if (ic)
-	{
-		if (literal.length() == 3)
-			std::cout << "'" << literal[1] << "'" << std::endl;
-		else if (literal.length() == 1)
-			std::cout << "'" << literal[0] << "'" << std::endl;
-	}
+		std::cout << "'" << literal[1] << "'" << std::endl;
 	else if (isSpecial)
 		std::cout << "impossible" << std::endl;
 	else if (id || iff || ii)
@@ -188,6 +180,8 @@ void ScalarConverter::convert(std::string const &literal)
 				std::cout << "Non displayable" << std::endl;
 		}
 	}
+	else 
+		std::cout << "impossible" << std::endl;
 	std::cout << "int: ";
 	if (isSpecial)
 		std::cout << "impossible" << std::endl;

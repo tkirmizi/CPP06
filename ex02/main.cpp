@@ -5,30 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: taha <taha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/15 18:46:30 by taha              #+#    #+#             */
-/*   Updated: 2025/02/16 12:47:40 by taha             ###   ########.fr       */
+/*   Created: 2025/02/15 20:32:42 by taha              #+#    #+#             */
+/*   Updated: 2025/02/16 13:35:19 by taha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScalarConverter.hpp"
+#include "Identify.hpp"
+#include "ABase.hpp"
+#include "A.hpp"
+#include "B.hpp"
+#include "C.hpp"
 
 
-int main(int argc, char **argv)
-{
-	try 
-	{
-		if (argc != 2)
-		{
-			std::cout << "Error: program must take one argument" << std::endl;
-			return 1;
-		}
-		ScalarConverter::convert(argv[1]);
+
+	int main() {
+		ABase* base = generate();
+		
+		identify(base);
+		identify(*base);
+		
+		delete base;
+		return 0;
 	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-		return 1;
-	}
-
-	return 0;
-}
