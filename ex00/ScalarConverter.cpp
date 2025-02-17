@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taha <taha@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tkirmizi <tkirmizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 18:44:56 by taha              #+#    #+#             */
-/*   Updated: 2025/02/16 12:42:38 by taha             ###   ########.fr       */
+/*   Updated: 2025/02/17 11:06:55 by tkirmizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ void ScalarConverter::convert(std::string const &literal)
 	bool iff = isFloat(literal);
 	bool id = isDouble(literal);
 
+	//CHAR
 	std::cout << "char: ";
 	if (ic)
 		std::cout << "'" << literal[1] << "'" << std::endl;
@@ -152,42 +153,31 @@ void ScalarConverter::convert(std::string const &literal)
 		std::cout << "impossible" << std::endl;
 	else if (id || iff || ii)
 	{
-		if (iff)
+		try
 		{
-			float f = std::stof(literal);
-			char c = static_cast<char>(f);
-			if (std::isprint(c))
-				std::cout << "'" << c << "'" << std::endl;
-			else 
-				std::cout << "Non displayable" << std::endl;
+			if (ii)
+				int value = static_cast<int>(literal[1]);
+			else if (iff)
+				int value = static_cast<int>(std::stof(literal));
+			else if (id)
+				int value = static_cast<int>(std::stod(literal));
 		}
-		else if (id)
+		catch(const std::exception& e)
 		{
-			double d = std::stod(literal);
-			char c = static_cast<char>(d);
-			if (std::isprint(c))
-				std::cout << "'" << c << "'" << std::endl;
-			else
-				std::cout << "Non displayable" << std::endl;
-		}
-		else
-		{
-			int i = std::stoi(literal);
-			char c = static_cast<char>(i);
-			if (std::isprint(c))
-				std::cout << "'" << c << "'" << std::endl;
-			else
-				std::cout << "Non displayable" << std::endl;
+			std::cout << "impossible" << std::endl;
 		}
 	}
 	else 
 		std::cout << "impossible" << std::endl;
+
+	// INT
 	std::cout << "int: ";
 	if (isSpecial)
 		std::cout << "impossible" << std::endl;
 	else
 	{
-		try {
+		try
+		{
 			int value = 0;
 			if (ic)
 				value = static_cast<int>(literal[1]);
@@ -199,11 +189,13 @@ void ScalarConverter::convert(std::string const &literal)
 				value = static_cast<int>(std::stod(literal));
 			std::cout << value << std::endl;
 		}
-		catch (const std::exception& e) {
+		catch (const std::exception& e)
+		{
 			std::cout << "impossible" << std::endl;
 		}
 	}
 
+	// FLOAT
 	std::cout << "float: ";
 	if (isSpecial)
 	{
@@ -216,22 +208,26 @@ void ScalarConverter::convert(std::string const &literal)
 	}
 	else
 	{
-		try {
-		float value = 0;
-		if (ic)
-			value = static_cast<float>(literal[1]);
-		else if (ii)
-			value = static_cast<float>(std::stoi(literal));
-		else if (iff)
-			value = std::stof(literal);
-		else if (id)
-			value = static_cast<float>(std::stod(literal));
-		std::cout << std::fixed << std::setprecision(1) << value << "f" << std::endl;
+		try
+		{
+			float value = 0;
+			if (ic)
+				value = static_cast<float>(literal[1]);
+			else if (ii)
+				value = static_cast<float>(std::stoi(literal));
+			else if (iff)
+				value = std::stof(literal);
+			else if (id)
+				value = static_cast<float>(std::stod(literal));
+			std::cout << std::fixed << std::setprecision(1) << value << "f" << std::endl;
 		}
-		catch (const std::exception& e) {
+		catch (const std::exception& e)
+		{
 			std::cout << "impossible" << std::endl;
 		}
 	}
+
+	//DOUBLE
 	std::cout << "double: ";
 	if (isSpecial)
 	{
@@ -256,7 +252,7 @@ void ScalarConverter::convert(std::string const &literal)
 				value = static_cast<double>(std::stof(literal));
 			else if (id)
 				value = std::stod(literal);
-		std::cout << std::fixed << std::setprecision(1) << value << std::endl;
+			std::cout << std::fixed << std::setprecision(1) << value << std::endl;
 		}
 		catch (const std::exception& e) 
 		{
